@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora de Interés Compuesto</title>
+</head>
+<body>
+    <h1>Calculadora</h1>
+    <p><strong>Ingrese los datos que aparecen acontinuacion para que sepa cual sera su monto final cuando se acabe el periodo de su Inversión:</strong></p>
+    
+    <form id="calculadoraFormulario">
+        Capital Inicial Ingresado: <input type="number" id="capitalInicial" required>
+        <br>
+        <br>
+        Tasa de Interés Anual (%): <input type="number" id="tasaInteres" required>
+        <br>
+        <br>
+        Período a la cual quieres tener tu Inversión (años): <input type="number" id="periodoInversion" required>
+        <br>
+        <br>
+        <input type="submit" value="Calcular Interes">
+    </form>
+
+    <h3>Monto obtenido al final de la Inversión:</h3>
+    <div id="montoFinal"></div>
+
+    <script>
+        var calculadoraFormulario = document.getElementById("calculadoraFormulario");
+        var montoFinalObtenido = document.getElementById("montoFinal");
+
+        calculadoraFormulario.addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            var capitalInicial = parseFloat(document.getElementById("capitalInicial").value);
+            var tasaInteres = parseFloat(document.getElementById("tasaInteres").value);
+            var periodoInversion = parseFloat(document.getElementById("periodoInversion").value);
+
+            var montoFinal = calcularMontoFinalObtenido(capitalInicial, tasaInteres, periodoInversion);
+            montoFinalObtenido.textContent = `Monto Final: $${montoFinal.toFixed(2)}`;
+        });
+
+        function calcularMontoFinalObtenido(capitalInicial, tasaInteres, periodoInversion) {
+            var tasaInteresDecimal = tasaInteres / 100;
+            var montoFinal = capitalInicial * Math.pow(1 + tasaInteresDecimal, periodoInversion);
+            return montoFinal;
+        }
+    </script>
+</body>
+</html>

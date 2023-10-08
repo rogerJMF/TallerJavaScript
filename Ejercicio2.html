@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulario de registro de estudiante</title>
+</head>
+<body>
+
+    <h1>Registro de estudiante</h1>
+    
+    Nombre:  <input type="text" id="nombre">
+    <br>
+    <br>
+
+    Edad: <input type="number" id="edad">
+    <br>
+    <br>
+
+    Número de Identificación:<input type="text" id="numeroIdentificacion">
+    <br>
+    <br>
+
+    <button onclick="agregarEstudianteNuevo()">Agregar Nuevo Estudiante</button>
+    <br>
+    <br>
+
+    Buscar por Número de Identificación:
+    <input type="text" id="buscarNumeroIdentificacion">
+    <button onclick="buscarEstudianteRegistrado()">Buscar Estudiante Registrado</button>
+
+</body>
+
+<script>
+
+const registroEstudianteNuevo = {};
+
+function agregarEstudianteNuevo() {
+    var nombre = document.getElementById("nombre").value;
+    var edad = parseInt(document.getElementById("edad").value);
+    var numeroIdentificacion = document.getElementById("numeroIdentificacion").value;
+
+    if (!nombre || isNaN(edad) || !numeroIdentificacion) {
+        alert("Por favor, complete todos los campos.");
+        return;
+    }
+
+    registroEstudianteNuevo[numeroIdentificacion] = { nombre, edad };
+    console.log(`Estudiante ${nombre} se ha agregado correctamente.`);
+    
+   
+    document.getElementById("nombre").value = "";
+    document.getElementById("edad").value = "";
+    document.getElementById("numeroIdentificacion").value = "";
+}
+
+function buscarEstudianteRegistrado() {
+    var numeroIdentificacion = document.getElementById("buscarNumeroIdentificacion").value;
+    var estudiante = registroEstudianteNuevo[numeroIdentificacion];
+    
+    if (estudiante) {
+        alert(`Información del estudiante agregado:
+        Nombre: ${estudiante.nombre}
+        Edad: ${estudiante.edad}`);
+    } else {
+        alert("Estudiante no encontrado.");
+    }
+}
+
+</script>
+
+</html>
+ 
+

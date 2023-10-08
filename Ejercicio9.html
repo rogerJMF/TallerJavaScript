@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora de Estadísticas</title>
+</head>
+<body>
+    <h1>Calculadora</h1>
+
+    <p><strong>Ingrese las calificaciones para poder obtener los datos:</strong></p>
+    
+    <form id="calificacionesFormulario">
+
+        Ingrese las calificaciones separadas por comas para poder calcular: 
+        <input type="text" id="calificacionesInput" required>
+        <input type="submit" value="Calcular">
+    </form>
+
+    <h2>Estadísticas calculadas:</h2>
+    <div id="resultado"></div>
+
+    <script>
+        var calificacionesFormulario = document.getElementById("calificacionesFormulario");
+        var calificacionesInput = document.getElementById("calificacionesInput");
+        var resultadoObtenido = document.getElementById("resultado");
+
+        calificacionesFormulario.addEventListener("submit", function(event) {
+            event.preventDefault();
+            var calificacionesIngresadas = calificacionesInput.value;
+            var calificacionesArray = calificacionesIngresadas.split(",").map(Number);
+            var estadisticas = calcularEstadisticas(calificacionesArray);
+            resultadoObtenido.textContent = `Promedio: ${estadisticas.promedio}, Calificación más alta: ${estadisticas.maximo}, Calificación más baja: ${estadisticas.minimo}`;
+        });
+
+        function calcularEstadisticas(calificaciones) {
+            if (calificaciones.length === 0) {
+                return {
+                    promedio: 0,
+                    maximo: null,
+                    minimo: null
+                };
+            }
+
+            let suma = 0;
+            let maximo = calificaciones[0];
+            let minimo = calificaciones[0];
+
+            for (let i = 0; i < calificaciones.length; i++) {
+                const calificacion = calificaciones[i];
+                suma += calificacion;
+
+                if (calificacion > maximo) {
+                    maximo = calificacion;
+                }
+
+                if (calificacion < minimo) {
+                    minimo = calificacion;
+                }
+            }
+
+            var promedio = suma / calificaciones.length;
+
+            return {
+                promedio: promedio.toFixed(2),
+                maximo: maximo,
+                minimo: minimo
+            };
+        }
+    </script>
+</body>
+</html>

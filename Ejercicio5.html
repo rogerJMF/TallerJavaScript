@@ -1,0 +1,46 @@
+<script>
+   
+    const preguntasYRespuestasGenerada = [
+        {
+            pregunta: "¿Cuál es la capital de Francia?",
+            respuesta: "París"
+        },
+        {
+            pregunta: "¿Quién escribió 'Cien años de soledad'?",
+            respuesta: "Gabriel García Márquez"
+        },
+        {
+            pregunta: "¿Cuantos planetas hay en nuestro sistema solar?",
+            respuesta: "ocho"
+        },
+        {
+            pregunta: "¿Cual es el rio más largo del mundo?",
+            respuesta: "El rio Amazonas"
+        }
+    ];
+
+    function jugarJuegoPreguntas() {
+        let puntuacion = 0;
+
+        for (let i = 0; i < preguntasYRespuestasGenerada.length; i++) {
+            var pregunta = preguntasYRespuestasGenerada[i].pregunta;
+            var respuestaCorrecta = preguntasYRespuestasGenerada[i].respuesta;
+            var respuestaIngresadaUsuario = prompt(`Pregunta ${i + 1}: ${pregunta}`);
+
+            if (respuestaIngresadaUsuario === null) {
+                break;
+            }
+
+            if (respuestaIngresadaUsuario.toLowerCase() === respuestaCorrecta.toLowerCase()) {
+                alert("¡Excelente esa es la respuesta correcta!");
+                puntuacion++;
+            } else {
+                alert("Lo siento la respuesta es incorrecta. La respuesta correcta es: " + respuestaCorrecta);
+            }
+        }
+
+        alert(`La Puntuación final que ha tenido es: Puntuación: ${puntuacion} de ${preguntasYRespuestasGenerada.length} respuestas correctas`);
+    }
+
+    jugarJuegoPreguntas();
+</script>

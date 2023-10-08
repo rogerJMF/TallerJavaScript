@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tabla de Multiplicar</title>
+</head>
+<body>
+    <h1>Generador de tablas de Multiplicar</h1>
+    <p><strong>Ingrese los datos pedidos en los campos:</strong></p>
+
+    <form>
+        Número seleccionado: <input type="number" id="numero" required>
+        <br>
+        <br>
+
+        Filas a mostrar: <input type="number" id="filas" required>
+        <br>
+        <br>
+
+        <button type="button" onclick="calculadorTabla()">Calcular</button>
+    </form>
+
+    <script>
+        function calculadorTabla() {
+            var numeroIngresado = parseInt(document.getElementById("numero").value);
+            var filasGeneradas = parseInt(document.getElementById("filas").value);
+
+            if (isNaN(numeroIngresado) || isNaN(filasGeneradas)) {
+                alert("Ingresa numeros validos.");
+                return;
+            }
+
+            var resultadoGenerado = "Resultado:\n";
+            for (let i = 1; i <= filasGeneradas; i++) {
+                resultadoGenerado += `${numeroIngresado} x ${i} = ${numeroIngresado * i}\n`;
+            }
+
+            alert(resultadoGenerado);
+        }
+    </script>
+</body>
+</html>

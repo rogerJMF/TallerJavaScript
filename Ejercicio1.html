@@ -1,0 +1,33 @@
+<script>
+
+const numeroAleatorio = Math.floor(Math.random() * 100) + 1;
+let Repeticiones = 0;
+
+function adivinarNumeroGenerado() {
+    const numeroIngresado = prompt("Adivina un numero del 1 al 100 ");
+    const numeroAdivinado = parseInt(numeroIngresado);
+
+    if (isNaN(numeroAdivinado) || numeroAdivinado < 1 || numeroAdivinado > 100) {
+        alert("Por favor, introduce un numero valido del 1 al 100 ");
+        adivinarNumeroGenerado(); 
+        return;
+    }
+
+    Repeticiones++;
+
+    if (numeroAdivinado === numeroAleatorio) {
+        alert(`¡Felicidades! Este es el numero generado ${numeroAleatorio} en ${Repeticiones} intentos.`);
+    } else if (numeroAdivinado < numeroAleatorio) {
+        alert("Introduce un numero más alto. Intenta nuevamente.");
+        adivinarNumeroGenerado(); 
+    } else {
+        alert("Introduce un numero más bajo. Intenta nuevamente.");
+        adivinarNumeroGenerado(); 
+    }
+}
+
+adivinarNumeroGenerado();
+
+
+    
+</script>

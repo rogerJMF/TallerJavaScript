@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora</title>
+</head>
+<body>
+    <h1>Calculadora Para hallar media, mediana y desviacion Estandar</h1>
+    Ingresa varios numeros separados por comas:
+    <input type="text" id="numeros">
+    <button onclick="calcularEstadisticasNumero()">Calcular</button>
+
+    <script>
+        function calcularEstadisticasNumero() {
+            var numerosCalculados = document.getElementById("numeros").value;
+            var numeros = numerosCalculados.split(",").map(numero => parseFloat(numero.trim()));
+
+            if (numeros.some(isNaN)) {
+                alert("Por favor, ingresa números válidos.");
+                return;
+            }
+
+            if (numeros.length === 0) {
+                alert("La lista de números está vacía.");
+                return;
+            }
+
+            var media = numeros.reduce((total, numero) => total + numero, 0) / numeros.length;
+
+            var sortedNumeros = [...numeros].sort((a, b) => a - b);
+            var middle = Math.floor(sortedNumeros.length / 2);
+            var mediana = sortedNumeros.length % 2 === 0 ? (sortedNumeros[middle - 1] + sortedNumeros[middle]) / 2 : sortedNumeros[middle];
+
+            var sumaDiferencia = numeros.reduce((total, numero) => total + Math.pow(numero - media, 2), 0);
+            var desviacionEstandar = Math.sqrt(sumaDiferencia / numeros.length);
+
+            var resultado = `Media: ${media.toFixed(2)}, Mediana: ${mediana.toFixed(2)}, Desviación Estándar: ${desviacionEstandar.toFixed(2)}`;
+            alert(resultado);
+        }
+    </script>
+</body>
+</html>

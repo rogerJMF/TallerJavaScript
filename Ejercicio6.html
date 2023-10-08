@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gestionador de sistema de libros</title>
+</head>
+<body>
+    <h1>Gestionador de sistema de busqueda de libros</h1>
+    
+    <h2>Agregar un Libro</h2>
+    <form id="formularioLibros">
+        Título del libro: <input type="text" id="titulo" required>
+        <br>
+        <br>
+        Autor del libro: <input type="text" id="autor" required>
+        <br>
+        <br>
+        Año de publicación: <input type="number" id="annio" required>
+        <br>
+        <br>
+        <input type="submit" value="Añadir Libro">
+    </form>
+
+    <h2>Busqueda de Libro</h2>
+    <form id="formularioBusqueda">
+        Buscar libro por titulo o por autor: <input type="text" id="busqueda" required>
+        <input type="submit" value="Buscar Libro">
+    </form>
+
+    <h2>Resultados</h2>
+    <div id="resultados"></div>
+
+    <script>
+        var libros = [];
+        var formularioLibros = document.getElementById("formularioLibros");
+        var formularioBusqueda = document.getElementById("formularioBusqueda");
+        var resultadosObtenidos = document.getElementById("resultados");
+
+        formularioLibros.addEventListener("submit", function(event) {
+            event.preventDefault();
+            var titulo = document.getElementById("titulo").value;
+            var autor = document.getElementById("autor").value;
+            var annio = document.getElementById("annio").value;
+            libros.push({ titulo, autor, annio });
+            formularioLibros.reset();
+        });
+
+        formularioBusqueda.addEventListener("submit", function(event) {
+            event.preventDefault();
+            var busqueda = document.getElementById("busqueda").value.toLowerCase();
+            var resultados = libros.filter(libro => {
+                return libro.titulo.toLowerCase().includes(busqueda) || libro.autor.toLowerCase().includes(busqueda);
+            });
+            resultadosObtenidos.innerHTML = resultados.length === 0 ? "No se encontraron los resultados ingresados." : resultados.map(libro => `<p>Título del libro: ${libro.titulo}, Autor del libro: ${libro.autor}, Año de publicación: ${libro.annio}</p>`).join("");
+        });
+    </script>
+</body>
+</html>

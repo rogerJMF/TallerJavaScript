@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generador de Contraseña</title>
+</head>
+<body>
+    <h1>Generador de Contraseñas Seguras</h1>
+    <p><strong></strong>Ingresa los datos en los campos pedidos para poder generar una contraseña segura para ti:</p>
+    
+    <form id="generadorFormulario">
+        Longitud que tendra la contrasena: <input type="number" id="longitud" min="4" required>
+        <br>
+        <br>
+        Caracteres:
+        <br>
+        <br>
+        <input type="checkbox" id="mayusculas"> Mayúsculas<br>
+        <input type="checkbox" id="minusculas"> Minúsculas<br>
+        <input type="checkbox" id="nums"> Números<br>
+        <input type="checkbox" id="especiales"> Especiales<br>
+        <input type="submit" value="Generar Contraseña ">
+    </form>
+
+    <h2>Contraseña Generada:</h2>
+    <div id="contrasena"></div>
+
+    <script>
+        var form = document.getElementById("generadorFormulario");
+        var contrasenaObtenida = document.getElementById("contrasena");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            var longitud = parseInt(document.getElementById("longitud").value);
+            var mayusculas = document.getElementById("mayusculas").checked;
+            var minusculas = document.getElementById("minusculas").checked;
+            var nums = document.getElementById("nums").checked;
+            var especiales = document.getElementById("especiales").checked;
+            var contrasena = generarContrasena(longitud, mayusculas, minusculas, nums, especiales);
+           
+        });
+
+        function generarContrasena(longitud, incluirMayusculas, incluirMinusculas, incluirNums, incluirEspeciales) {
+            let caracteres = "";
+            if (incluirMayusculas) caracteres += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            if (incluirMinusculas) caracteres += "abcdefghijklmnopqrstuvwxyz";
+            if (incluirNums) caracteres += "0123456789";
+            if (incluirEspeciales) caracteres += "!@#$%^&*";
+            let contrasena = "";
+            for (let i = 0; i < longitud; i++) {
+                var randomIndex = Math.floor(Math.random() * caracteres.length);
+                contrasena += caracteres.charAt(randomIndex);
+            }
+            
+            alert (contrasena);
+        }
+    </script>
+</body>
+</html>

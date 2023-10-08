@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora de IMC</title>
+</head>
+<body>
+    <h1>Calculadora de IMC</h1>
+    <p><strong>Ingresa los siguientes datos para calcular tu IMC</strong></p>
+    
+    <form id="imcFormulario">
+        Peso en (kg): <input type="number" id="peso" step="0.01" required>
+        <br>
+        <br>
+        Altura en (m): <input type="number" id="altura" step="0.01" required>
+        <br>
+        <br>
+        <input type="submit" value="Calcular IMC">
+    </form>
+
+    <h3>Resultado:</h3>
+    <div id="resultadoCalculado"></div>
+
+    <script>
+        var imcFormulario = document.getElementById("imcFormulario");
+        var resultadoObtenido = document.getElementById("resultadoCalculado");
+
+        imcFormulario.addEventListener("submit", function(event) {
+            event.preventDefault();
+            var peso = parseFloat(document.getElementById("peso").value);
+            var altura = parseFloat(document.getElementById("altura").value);
+            var imc = (peso / (altura * altura)).toFixed(2);
+            var mensaje = imc < 18.5 ? "Peso bajo" : imc < 24.9 ? "Peso normal" : imc < 29.9 ? "Sobrepeso" : "Obesidad";
+            resultadoObtenido.textContent = `Con los calculos de tus datos tu IMC es ${imc}. Estas en el rango de ${mensaje}.`;
+        });
+    </script>
+</body>
+</html>
